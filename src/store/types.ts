@@ -5,10 +5,16 @@ export type TProduct = {
         value: number,
         currency: string
     },
-    photos: string[]
+    photos?: string[]
 };
 
+export type TCartItem = {
+    id?: string;
+    count?: number;
+}
+
 export type TBaseStore = {
+    cart?: TCartItem[],
     products?: TProduct[],
 };
 

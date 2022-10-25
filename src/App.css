@@ -3,4 +3,17 @@
     padding: 0;
     box-sizing: border-box;
     outline: none;
+    font-family: Poppins-Light, sans-serif;
+}
+
+body {
+    color: #222222;
+}
+
+b {
+    font-family: Poppins-Bold, sans-serif;
+}
+
+*:disabled {
+    pointer-events: none;
 }

@@ -17,7 +17,6 @@ const useProductsList = (): [TProductsListState, TProductsListActions] => {
     const read = async () => {
         const data = await products.read();
         
-        
         dispatch({
             products: data
         });
