@@ -10,9 +10,12 @@
     "@types/node": "^16.18.0",
     "@types/react": "^18.0.22",
     "@types/react-dom": "^18.0.7",
+    "event-storm": "^5.0.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-event-storm": "^5.0.6",
     "react-scripts": "5.0.1",
+    "styled-components": "^5.3.6",
     "typescript": "^4.8.4",
     "web-vitals": "^2.1.4"
   },
