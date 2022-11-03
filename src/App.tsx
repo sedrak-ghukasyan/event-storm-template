@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import CartPage from 'pages/Cart';
+import LoggerPage from 'pages/Logger';
 import ProductsPage from 'pages/Products';
 
 import './App.css';
@@ -16,18 +17,20 @@ const GridItem = styled.div`
     width: 100%;
 `;
 
-const App = () => (
-    <GridContainer>
-        <GridItem>
-            <ProductsPage />
-        </GridItem>
-        <GridItem>
-            <CartPage />
-        </GridItem>
-        <GridItem>
-            
-        </GridItem>
-    </GridContainer>
-);
+const App = () => {
+    return (
+        <GridContainer>
+            <GridItem>
+                <ProductsPage />
+            </GridItem>
+            <GridItem>
+                <CartPage />
+            </GridItem>
+            <GridItem style={{ maxWidth: 400 }}>
+                <LoggerPage />
+            </GridItem>
+        </GridContainer>
+    );
+}
 
 export default App;

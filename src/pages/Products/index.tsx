@@ -1,8 +1,8 @@
+import { useEffect } from "react";
 import styled from 'styled-components';
 
-import { useEffect } from "react";
-
 import useProductsList from "store/products";
+import useInterval from 'utils/useInterval';
 
 import ProductCard from './Card';
 
@@ -25,6 +25,10 @@ const ProductsPage = () => {
     useEffect(() => {
         productsActions.read();
     }, []);
+
+    useInterval(() => {
+        productsActions.inflation();
+    }, 2000);
 
     return (
         <>

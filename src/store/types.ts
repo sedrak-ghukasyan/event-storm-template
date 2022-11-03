@@ -1,16 +1,19 @@
+export type TPrice = {
+    value: number,
+    currency: string
+}
+
 export type TProduct = {
     id: string;
     name: string,
-    price: {
-        value: number,
-        currency: string
-    },
+    price: TPrice,
     photos?: string[]
 };
 
 export type TCartItem = {
     id?: string;
     count?: number;
+    price?: TPrice;
 }
 
 export type TBaseStore = {

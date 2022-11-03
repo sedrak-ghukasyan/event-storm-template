@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import useCart from "store/cart";
 
 import CartCard from './Card';
+import { useCartTotalPrice } from './utils';
 
 const GridContainer = styled.div`
     display: grid;
@@ -19,11 +20,12 @@ const Title = styled.h3`
 
 const CartPage = () => {
     const [cart] = useCart();
+    const totalPrice = useCartTotalPrice();
 
     return (
         <>
             <Title>
-                Cart
+                Cart ({ totalPrice })
             </Title>
             <GridContainer>
                 {cart?.length > 0 && cart.map((item) => (

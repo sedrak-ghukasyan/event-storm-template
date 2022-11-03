@@ -7,6 +7,8 @@ export type TCartActions = {
     remove: (id: string) => void;
     toggle: (id: string) => void;
     match: (id: string) => boolean;
+    plus: (id: string) => void;
+    minus: (id: string) => void;
 };
 
 const useCart = (): [TCartState, TCartActions] => {
@@ -15,12 +17,14 @@ const useCart = (): [TCartState, TCartActions] => {
         subscribe(state.cart)
     );
 
-    const match = (id: string): boolean => {
-        return cartItems?.findIndex(i => i.id === id) >= 0;
+    const findIndex = (id: string): number => {
+        return cartItems?.findIndex(i => i.id === id);
     }
 
+    const match = (id: string): boolean => findIndex(id) >= 0;
+
     const remove = (id: string) => {
-        if (match(id) ) {
+        if (match(id)) {
             dispatch(({ cart }) => ({
                 cart: cart.filter(item => item.id !== id)
             }));
@@ -45,7 +49,39 @@ const useCart = (): [TCartState, TCartActions] => {
         match(id) ? remove(id) : add(id);
     }
 
-    return [cartItems, { add, match, remove, toggle }];
+    const plus = (id: string) => {
+        const index = findIndex(id);
+
+        dispatch(({ cart = [] }) => {
+            const item = cart[index];
+            cart[index] = {
+                ...item,
+                count: ++item.count,
+            }
+            return {
+                cart,
+            };
+        });
+    }
+
+    const minus = (id: string) => {
+        const index = findIndex(id);
+        const item = cartItems[index];
+
+        if (item.count > 1) {
+            dispatch(({ cart = [] }) => {
+                cart[index] = {
+                    ...item,
+                    count: --item.count,
+                }
+                return {
+                    cart,
+                };
+            });
+        }
+    }
+
+    return [cartItems, { add, match, remove, toggle, plus, minus }];
 }
 
 export default useCart;

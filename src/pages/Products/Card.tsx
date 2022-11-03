@@ -61,13 +61,18 @@ interface ProductCard {
 
 const ProductCard = ({ item }): JSX.Element => {
     const [, cartAction] = useCart();
+    const isMatch = cartAction.match(item.id);
 
+    const handleAddToCart = () => {
+        isMatch ? cartAction.remove(item.id) : cartAction.add(item.id)
+    }
+    
     return (
         <Root>
             <Image src={item.photos[0]}>
                 <CartButton
-                    matched={cartAction.match(item.id)}
-                    onClick={() => cartAction.toggle(item.id)}
+                    matched={isMatch}
+                    onClick={handleAddToCart}
                 />
             </Image>
             <Name>{item.name}</Name>
