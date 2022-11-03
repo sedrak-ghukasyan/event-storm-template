@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import styled from 'styled-components';
 
 import useCart from 'store/cart';
@@ -83,12 +85,19 @@ interface CartCard {
     item: TCartItem
 }
 
+let rerenderCount = 1;
+
 const CartCard = ({ item }): JSX.Element => {
     const [, cartActions] = useCart();
     const [product] = useProductsItem(item.id);
     
+    rerenderCount++;
+
     return (
         <Root>
+            <span style={{ position: 'absolute', top: -16, left: 0, color: 'red', fontSize: 10 }}>
+                re-render: {rerenderCount}
+            </span>
             <Image src={product.photos[0]} />
             <Content>
                 <Name>{product.name}</Name>
@@ -110,4 +119,4 @@ const CartCard = ({ item }): JSX.Element => {
     );
 }
 
-export default CartCard;
+export default memo(CartCard);

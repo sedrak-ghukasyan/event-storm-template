@@ -27,15 +27,25 @@ const useProductsList = (): [TProductsListState, TProductsListActions] => {
     }
 
     const inflation = () => {
-        dispatch({
-            products: productsState.map(({ price, ...item }) => ({
-                ...item,
-                name: item.name,
-                price: {
-                    ...price,
-                    value: price.value + 10,
+        dispatch(({ products }) => {
+            products.forEach((item, index) => {
+                if (index % 3) {
+                    item.price.value = item.price.value + 10;
                 }
-            })),
+            });
+
+            // products: productsState.map(({ price, ...item }) => ({
+            //     ...item,
+            //     name: item.name,
+            //     price: {
+            //         ...price,
+            //         value: price.value + 10,
+            //     }
+            // })),
+
+            return ({
+                products
+            });
         });
     }
 
