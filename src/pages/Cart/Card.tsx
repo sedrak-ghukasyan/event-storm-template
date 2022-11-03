@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useRef } from 'react';
 
 import styled from 'styled-components';
 
@@ -85,18 +85,17 @@ interface CartCard {
     item: TCartItem
 }
 
-let rerenderCount = 1;
-
 const CartCard = ({ item }): JSX.Element => {
+    const rerenderCount = useRef(0);
     const [, cartActions] = useCart();
     const [product] = useProductsItem(item.id);
     
-    rerenderCount++;
+    rerenderCount.current++;
 
     return (
         <Root>
             <span style={{ position: 'absolute', top: -16, left: 0, color: 'red', fontSize: 10 }}>
-                re-render: {rerenderCount}
+                re-render: {rerenderCount.current}
             </span>
             <Image src={product.photos[0]} />
             <Content>

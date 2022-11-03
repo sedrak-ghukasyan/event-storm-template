@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import styled from 'styled-components';
 
 import useProductsList from "store/products";
@@ -20,6 +20,7 @@ const Title = styled.h3`
 `;
 
 const ProductsPage = () => {
+    const rerenderCount = useRef(0);
     const [products, productsActions] = useProductsList();
 
     useEffect(() => {
@@ -30,11 +31,16 @@ const ProductsPage = () => {
         productsActions.inflation();
     }, 2000);
 
+    rerenderCount.current++;
+
     return (
         <>
             <Title>
                 Products
             </Title>
+            <span style={{ color: 'red', fontSize: 10 }}>
+                re-render: {rerenderCount.current}
+            </span>
             <GridContainer>
                 {products?.length > 0 && products.map((product) => (
                     <ProductCard key={product.id} item={product} />
